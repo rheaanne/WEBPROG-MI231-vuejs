@@ -1,10 +1,9 @@
 const app = Vue.createApp({
     data() {
      return {
-      message: "Hello World!"
-         vueCalss: "pinkBG"
+      message: "Hello classmates!",
+      vueClass: "pinkBG"
      }
     }
    })
-   
    app.mount('#app')
