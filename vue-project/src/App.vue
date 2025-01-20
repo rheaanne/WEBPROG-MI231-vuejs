@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <h1> HelloWorld </h1>
+  <h1> Hello Guys! Hihi </h1>
 </template>
 
 <style>
