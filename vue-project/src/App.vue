@@ -7,19 +7,6 @@
   </div>
 </template>
 
-<script>
-import FoodItem from './components/FoodItem.vue';
-import FoodItem2 from './components/FoodItem2.vue';
-
-export default {
-  name: 'App',
-  components: {
-    FoodItem,
-    FoodItem2,
-  },
-};
-</script>
 
 <style>
-/* Add global styles here if needed */
 </style>
