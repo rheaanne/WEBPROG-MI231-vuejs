@@ -1,6 +1,5 @@
 <template>
   <div class="grid-container">
-    <!-- About Me Section -->
     <section class="section">
       <h2>About Me</h2>
       <div class="flex-container">
@@ -12,7 +11,6 @@
       </div>
     </section>
 
-    <!-- Education & Achievements Section -->
     <section class="section">
       <h2>Education & Achievements</h2>
       <div class="flex-container">
@@ -28,7 +26,6 @@
       </div>
     </section>
 
-    <!-- IT Experience Section -->
     <section class="section">
       <h2>IT Experience</h2>
       <div class="flex-container">
@@ -39,7 +36,6 @@
       </div>
     </section>
 
-    <!-- Hobbies & Interests Section -->
     <section class="section">
       <h2>Hobbies & Interests</h2>
       <div class="flex-container row">
@@ -50,7 +46,6 @@
       </div>
     </section>
 
-    <!-- Goals Section -->
     <section class="section">
       <h2>Goals in Life</h2>
       <div class="flex-container">
@@ -59,7 +54,6 @@
     </section>
   </div>
 
-  <!-- Footer Section -->
   <footer>
     <h2>Picture Gallery</h2>
     <div class="gallery">
