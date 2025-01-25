@@ -50,4 +50,32 @@ h1 {
   justify-content: center; /* Centers the profile horizontally */
   align-items: center; /* Centers the profile vertically */
 }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  margin: 0 auto;
+  flex-grow: 1;
+}
+
+.section {
+  background-color:rgb(205, 96, 163);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.flex-container.row {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
 </style>
