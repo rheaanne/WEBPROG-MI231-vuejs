@@ -5,6 +5,7 @@
     <food-item2 />
     <food-item />
 
+    <!-- Personal Profile Component -->
     <div class="personal-profile-container">
       <personal-profile />
     </div>
@@ -22,7 +23,7 @@ export default {
   font-family: Arial, sans-serif;
   padding: 1.5rem;
   text-align: center;
-  background-color:rgb(238, 103, 170);
+  background-color: #fdfdfd;
 }
 
 h1 {
@@ -32,9 +33,13 @@ h1 {
 }
 
 .personal-profile-container {
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
   border: 2px solid pink;
   padding: 1rem;
   margin-top: 2rem;
   border-radius: 8px;
+  height: 300px; /* Set a fixed height to center vertically */
 }
 </style>
