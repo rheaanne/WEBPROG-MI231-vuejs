@@ -20,8 +20,18 @@
 </template>
 
 <script>
+// Import the custom components here
+import FoodItem from './components/FoodItem.vue'; 
+import FoodItem2 from './components/FoodItem2.vue'; 
+import PersonalProfile from './components/PersonalProfile.vue'; 
+
 export default {
   name: "App",
+  components: {
+    FoodItem,
+    FoodItem2,
+    PersonalProfile
+  }
 };
 </script>
 
@@ -73,6 +83,7 @@ h2 {
   margin: 0 auto;
   flex-grow: 1;
 }
+
 .section {
   background-color: #ffffff;
   padding: 20px;
