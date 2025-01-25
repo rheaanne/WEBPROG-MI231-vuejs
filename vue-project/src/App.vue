@@ -4,7 +4,10 @@
     <food-item />
     <food-item2 />
     <food-item />
-    <personal-profile />
+
+    <div class="personal-profile-container">
+      <personal-profile />
+    </div>
   </div>
 </template>
 
@@ -19,12 +22,19 @@ export default {
   font-family: Arial, sans-serif;
   padding: 1.5rem;
   text-align: center;
-  background-color: #fdfdfd;
+  background-color:rgb(238, 103, 170);
 }
 
 h1 {
   font-size: 2rem;
   margin-bottom: 1rem;
   color: #333;
+}
+
+.personal-profile-container {
+  border: 2px solid pink;
+  padding: 1rem;
+  margin-top: 2rem;
+  border-radius: 8px;
 }
 </style>
