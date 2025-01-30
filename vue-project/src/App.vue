@@ -1,44 +1,43 @@
 <template>
   <div id="app">
-   <template>
+    <!-- Displaying countries from Supabase -->
     <ul>
       <li v-for="country in countries" :key="country.id">{{ country.name }}</li>
     </ul>
-  </template>
 
     <h1>Food</h1>
     <div class="food-container">
-      <food-item />
-      <food-item2 />
-      <food-item />
+      <FoodItem />
+      <FoodItem2 />
+      <FoodItem />
     </div>
 
     <div class="personal-profile-container">
-      <personal-profile />
+      <PersonalProfile />
     </div>
   </div>
 </template>
 
 <script setup>
-  import { ref, onMounted } from 'vue'
-  import { supabase } from './lib/supabaseClient'
+import { ref, onMounted } from 'vue';
+import { supabase } from './lib/supabaseClient';
+import FoodItem from './components/FoodItem.vue';
+import FoodItem2 from './components/FoodItem2.vue';
+import PersonalProfile from './components/PersonalProfile.vue';
 
-  const countries = ref([])
+const countries = ref([]);
 
-  async function getCountries() {
-    const { data } = await supabase.from('countries').select()
-    countries.value = data
+async function getCountries() {
+  try {
+    const { data, error } = await supabase.from('countries').select();
+    if (error) throw error;
+    countries.value = data || []; // Ensure default value
+  } catch (err) {
+    console.error("Error fetching countries:", err.message);
   }
+}
 
-  onMounted(() => {
-    getCountries()
-  })
-  </script>
-
-<script>
-export default {
-  name: "App",
-};
+onMounted(getCountries);
 </script>
 
 <style scoped>
@@ -57,8 +56,8 @@ h1 {
 
 .food-container {
   display: flex;
-  justify-content: space-around; /* Aligns items with space between */
-  gap: 1rem; /* Adds space between items */
+  justify-content: space-around;
+  gap: 1rem;
   margin-bottom: 2rem;
 }
 
@@ -68,8 +67,8 @@ h1 {
   margin-top: 2rem;
   border-radius: 8px;
   display: flex;
-  justify-content: center; /* Centers the profile horizontally */
-  align-items: center; /* Centers the profile vertically */
+  justify-content: center;
+  align-items: center;
 }
 
 .grid-container {
@@ -78,11 +77,10 @@ h1 {
   gap: 20px;
   padding: 20px;
   margin: 0 auto;
-  flex-grow: 1;
 }
 
 .section {
-  background-color:rgb(205, 96, 163);
+  background-color: rgb(205, 96, 163);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
