@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <!-- Displaying countries from Supabase -->
     <ul>
       <li v-for="country in countries" :key="country.id">{{ country.name }}</li>
     </ul>
@@ -25,13 +24,17 @@ import FoodItem from './components/FoodItem.vue';
 import FoodItem2 from './components/FoodItem2.vue';
 import PersonalProfile from './components/PersonalProfile.vue';
 
-const countries = ref([]);
+const countries = ref([
+  { id: 1, name: "Canada" },
+  { id: 2, name: "United States" },
+  { id: 3, name: "Mexico" }
+]);
 
 async function getCountries() {
   try {
     const { data, error } = await supabase.from('countries').select();
     if (error) throw error;
-    countries.value = data || []; // Ensure default value
+    if (data) countries.value = data;
   } catch (err) {
     console.error("Error fetching countries:", err.message);
   }
