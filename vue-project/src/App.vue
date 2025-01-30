@@ -13,7 +13,6 @@
       <food-item />
     </div>
 
-    <!-- Personal Profile Component -->
     <div class="personal-profile-container">
       <personal-profile />
     </div>
