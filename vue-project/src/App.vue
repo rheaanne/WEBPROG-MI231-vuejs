@@ -1,30 +1,41 @@
 <template>
   <h1>Food</h1>
-     <ul>
-      <li v-for="country in countries" :key="country.id">{{ country.name }}</li>
-    </ul>
-    <br>
-  <food-item/>
-  <food-item2/>
-  <food-item/>
-  <personal-profile/> 
+  <ul>
+    <li v-for="country in countries" :key="country.id">{{ country.name }}</li>
+  </ul>
+  <br>
+  <food-item />
+  <food-item2 />
+  <food-item />
+  <personal-profile />
 </template>
 
- <script setup>
-  import { ref, onMounted } from 'vue'
-  import { supabase } from './lib/supabaseClient'
+<script setup>
+import { ref, onMounted } from 'vue'
+import { createClient } from '@supabase/supabase-js'
+import FoodItem from '@/components/FoodItem.vue' // Ensure correct path
+import FoodItem2 from '@/components/FoodItem2.vue' // Ensure correct path
+import PersonalProfile from '@/components/PersonalProfile.vue' // Ensure correct path
 
-  const countries = ref([])
+const supabaseUrl = 'https://tarftmmhhbslgntaoxgp.supabase.co'
+const supabaseKey = import.meta.env.VITE_SUPABASE_KEY
+const supabase = createClient(supabaseUrl, supabaseKey)
 
-  async function getCountries() {
-    const { data } = await supabase.from('countries').select()
+const countries = ref([])
+
+async function getCountries() {
+  const { data, error } = await supabase.from('countries').select('*')
+  if (error) {
+    console.error('Error fetching countries:', error.message)
+  } else {
     countries.value = data
   }
+}
 
-  onMounted(() => {
-    getCountries()
-  })
-  </script>
+onMounted(() => {
+  getCountries()
+})
+</script>
 
 <style scoped>
 #app {
