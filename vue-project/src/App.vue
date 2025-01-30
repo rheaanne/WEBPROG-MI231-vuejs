@@ -19,30 +19,25 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { supabase } from './lib/supabaseClient';
+import { supabase } from './lib/supabaseClient'; // Correct path
 import FoodItem from './components/FoodItem.vue';
 import FoodItem2 from './components/FoodItem2.vue';
 import PersonalProfile from './components/PersonalProfile.vue';
 
-const countries = ref([
-  { id: 1, name: "Canada" },
-  { id: 2, name: "United States" },
-  { id: 3, name: "Mexico" }
-]);
+const countries = ref([]);
 
 async function getCountries() {
   try {
     const { data, error } = await supabase.from('countries').select();
     if (error) throw error;
-    if (data) countries.value = data;
+    countries.value = data || []; // Ensure a default value
   } catch (err) {
-    console.error("Error fetching countries:", err.message);
+    console.error('Error fetching countries:', err.message);
   }
 }
 
 onMounted(getCountries);
 </script>
-
 <style scoped>
 #app {
   font-family: Arial, sans-serif;
