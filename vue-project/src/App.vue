@@ -1,44 +1,30 @@
 <template>
-  <div id="app">
-    <h1>Countries</h1>
-    <ul>
+  <h1>Food</h1>
+     <ul>
       <li v-for="country in countries" :key="country.id">{{ country.name }}</li>
     </ul>
-
-    <h1>Food</h1>
-    <div class="food-container">
-      <FoodItem />
-      <FoodItem2 />
-      <FoodItem />
-    </div>
-
-    <div class="personal-profile-container">
-      <PersonalProfile />
-    </div>
-  </div>
+    <br>
+  <food-item/>
+  <food-item2/>
+  <food-item/>
+  <personal-profile/> 
 </template>
 
-<script setup>
-import { ref, onMounted } from 'vue';
-import { supabase } from './lib/supabaseClient';
-import FoodItem from './components/FoodItem.vue';
-import FoodItem2 from './components/FoodItem2.vue';
-import PersonalProfile from './components/PersonalProfile.vue';
+ <script setup>
+  import { ref, onMounted } from 'vue'
+  import { supabase } from './lib/supabaseClient'
 
-const countries = ref([]);
+  const countries = ref([])
 
-async function fetchCountries() {
-  try {
-    const { data, error } = await supabase.from('countries').select();
-    if (error) throw error;
-    countries.value = data;
-  } catch (err) {
-    console.error('Error fetching countries:', err);
+  async function getCountries() {
+    const { data } = await supabase.from('countries').select()
+    countries.value = data
   }
-}
 
-onMounted(fetchCountries);
-</script>
+  onMounted(() => {
+    getCountries()
+  })
+  </script>
 
 <style scoped>
 #app {
