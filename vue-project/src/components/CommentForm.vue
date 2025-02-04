@@ -1,22 +1,27 @@
 <template>
-    <div>
-      <h2>Leave a Comment</h2>
-      <form @submit.prevent="submitComment">
-        <div class="form-group">
-          <label for="name">Name:</label>
-          <input type="text" id="name" v-model="name" required class="form-control">
-        </div>
-        <div class="form-group">
-          <label for="comment">Comment:</label>
-          <textarea id="comment" v-model="comment" required class="form-control"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <div v-if="submissionStatus" class="mt-2">
-          {{ submissionStatus }}
-        </div>
-      </form>
-    </div>
-  </template>
+  <div>
+    <h1>Leave a Comment</h1>
+    <form @submit.prevent="submitComment">
+      <label>Name:</label>
+      <input v-model="name" type="text" required />
+      
+      <label>Comment:</label>
+      <textarea v-model="comment" required></textarea>
+      
+      <button type="submit">Submit</button>
+    </form>
+    
+    <p v-if="errorMessage" style="color: red;">{{ errorMessage }}</p>
+
+    <h1>Comments</h1>
+    <ul>
+      <li v-for="comment in comments" :key="comment.id">
+        <strong>{{ comment.name }}:</strong> {{ comment.comment }}
+      </li>
+    </ul>
+  </div>
+</template>
+
   
  <script setup>
 import { ref, onMounted } from 'vue'
@@ -59,6 +64,7 @@ async function submitComment() {
 
 onMounted(getComments)
 </script>
+
 
   
   <style scoped>
