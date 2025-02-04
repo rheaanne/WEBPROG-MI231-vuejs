@@ -1,9 +1,4 @@
-<template>
-    <h1>Comments</h1>
-    <ul>
-      <li v-for="comment in comments" :key="comment.id">{{ comment.name }} {{ comment.comment }}</li>
-    </ul>
-  </template>
+
   
   <script></script>
   
