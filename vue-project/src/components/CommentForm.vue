@@ -1,22 +1,23 @@
 <template>
-  <div>
+  <div class="comment-container">
     <h1>Leave a Comment</h1>
+    
     <form @submit.prevent="submitComment">
       <label>Name:</label>
       <input v-model="name" type="text" required />
-      
+
       <label>Comment:</label>
       <textarea v-model="comment" required></textarea>
-      
+
       <button type="submit">Submit</button>
     </form>
-    
-    <p v-if="errorMessage" style="color: red;">{{ errorMessage }}</p>
+
+    <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
 
     <h1>Comments</h1>
     <ul>
-      <li v-for="comment in comments" :key="comment.id">
-        <strong>{{ comment.name }}:</strong> {{ comment.comment }}
+      <li v-for="c in comments" :key="c.id">
+        <strong>{{ c.name }}:</strong> {{ c.comment }}
       </li>
     </ul>
   </div>
@@ -25,7 +26,7 @@
   
  <script setup>
 import { ref, onMounted } from 'vue'
-import { supabase } from '../lib/supabaseClient'
+import { supabase } from '../lib/supabaseClient' // Ensure this file is correctly set up
 
 const comments = ref([])
 const name = ref('')
@@ -33,7 +34,7 @@ const comment = ref('')
 const errorMessage = ref('')
 
 async function getComments() {
-  const { data, error } = await supabase.from('comments').select()
+  const { data, error } = await supabase.from('comments').select().order('created_at', { ascending: false })
   if (error) {
     console.error('Error fetching comments:', error.message)
   } else {
