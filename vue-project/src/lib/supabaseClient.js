@@ -1,4 +1,4 @@
-import { createClient } from '@lib/supabaseClient'
+import { supabase } from '@/lib/supabaseClient'
 
 const supabaseUrl = 'https://tarftmmhhbslgntaoxgp.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
