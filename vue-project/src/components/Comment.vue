@@ -1,17 +1,32 @@
 <template>
   <div>
+    <h1>Leave a Comment</h1>
+    <form @submit.prevent="submitComment">
+      <label>Name:</label>
+      <input v-model="name" type="text" required />
+      
+      <label>Comment:</label>
+      <textarea v-model="comment" required></textarea>
+      
+      <button type="submit">Submit</button>
+    </form>
+    
+    <p v-if="errorMessage" style="color: red;">{{ errorMessage }}</p>
+
     <h1>Comments</h1>
     <ul>
       <li v-for="comment in comments" :key="comment.id">
-        {{ comment.content }} - By: {{ comment.profiles?.display_name || 'Unknown User' }}
+        <strong>{{ comment.name }}:</strong> {{ comment.comment }}
       </li>
     </ul>
-
-    <h2>Leave a Comment</h2>
-    <input type="text" v-model="commentText" placeholder="Your comment">
-    <button @click="submitComment">Submit</button>
-    <p v-if="submissionError">{{ submissionError }}</p> </div>
+  </div>
 </template>
+
+    <h1>Comments</h1>
+    <ul>
+      <li v-for="comment in comments" :key="comment.id">{{ comment.name }} {{ comment.comment }}</li>
+    </ul>
+  </template>
   
   <script></script>
   

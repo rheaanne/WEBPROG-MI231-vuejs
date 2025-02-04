@@ -18,39 +18,48 @@
     </div>
   </template>
   
-  <script setup>
-  import { ref } from 'vue';
-  import { supabase } from '../lib/supabaseClient'
+ <script setup>
+import { ref, onMounted } from 'vue'
+import { supabase } from '../lib/supabaseClient'
 
-  
-  const name = ref('');
-  const comment = ref('');
-  const submissionStatus = ref(null);
-  
-  // Your Supabase URL and Key - IMPORTANT!
-  const tableName = 'comments'; // Name of your Supabase table
-  
-  async function submitComment() {
-    submissionStatus.value = "Submitting...";
-    try {
-      const { error } = await supabase
-        .from(tableName)
-        .insert([{ name: name.value, comment: comment.value }]);
-  
-      if (error) {
-        console.error("Error inserting comment:", error);
-        submissionStatus.value = "Error submitting comment. Please try again.";
-      } else {
-        submissionStatus.value = "Comment submitted successfully!";
-        name.value = ''; // Clear form fields
-        comment.value = '';
-      }
-    } catch (err) {
-      console.error("An unexpected error occurred:", err);
-      submissionStatus.value = "An unexpected error occurred. Please try again later.";
-    }
+const comments = ref([])
+const name = ref('')
+const comment = ref('')
+const errorMessage = ref('')
+
+async function getComments() {
+  const { data, error } = await supabase.from('comments').select()
+  if (error) {
+    console.error('Error fetching comments:', error.message)
+  } else {
+    comments.value = data
   }
-  </script>
+}
+
+async function submitComment() {
+  if (!name.value || !comment.value) {
+    errorMessage.value = 'Please fill out all fields.'
+    return
+  }
+
+  const { error } = await supabase
+    .from('comments')
+    .insert([{ name: name.value, comment: comment.value }])
+
+  if (error) {
+    errorMessage.value = 'Error submitting comment. Please try again.'
+    console.error('Error submitting comment:', error.message)
+  } else {
+    name.value = ''
+    comment.value = ''
+    errorMessage.value = ''
+    getComments() // Refresh comments
+  }
+}
+
+onMounted(getComments)
+</script>
+
   
   <style scoped>
   /* Basic styling - Customize as needed */
