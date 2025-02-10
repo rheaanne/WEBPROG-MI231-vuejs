@@ -7,6 +7,7 @@
   <personal-profile/> 
   <comment-form/>
   <comment/>
+  <restapi/>
 </template>
 
 <script></script>
